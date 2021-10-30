@@ -3,7 +3,7 @@
 #include "aluno.h"
 #define MAX 100
 
-void addAluno(tAlunoEntrada *vetAlunos, int n, char *mod, int RA, float p1, float p2, float pt, float po)
+void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, float p2, float pt, float po)
 {
 	strcpy(vetAlunos[n].nome, mod);
 	vetAlunos[n].RA = RA;
@@ -17,7 +17,7 @@ void addAluno(tAlunoEntrada *vetAlunos, int n, char *mod, int RA, float p1, floa
 
 void criaAprovados(){
 FILE *pont_aprov;
-pont_aprov = fopen("aprovados.txt", "a");
+pont_aprov = fopen("Aprovados.txt", "a");
 fclose(pont_aprov);
 printf("O arquivo com os alunos aprovados foi criado com sucesso!");
 }
@@ -29,7 +29,7 @@ fclose(pont_reprov);
 printf("O arquivo com os alunos reprovados foi criado com sucesso!");
 }
 
-void abreArquivo(){
+/*void abreArquivo(){
 
 printf("Digite o nome do arquivo que contem os alunos");
 FILE* arqEntrada;
@@ -42,4 +42,4 @@ if( arqEntrada == NULL ){
   printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
 }else{
 	//adicionar alguma forma de os dados serem adicionados no vetor
-}
+}*/

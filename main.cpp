@@ -29,7 +29,7 @@ do{
 		if(op == 1)
 		{
 		scanf(" %[^\n]", nome);
-		scanf("%d %f %f %f %f %f",RA,&p1,&p2,&pt,&po,&media);
+		scanf("%d %f %f %f %f",&RA,&p1,&p2,&pt,&po);
 		addAluno(vetAlunos,tamvetAlunos,nome,RA,p1,p2,pt,po);
 		}
 		else if(op == 2)
@@ -48,4 +48,3 @@ do{
 	}while(op != 6);
 
 }
-
