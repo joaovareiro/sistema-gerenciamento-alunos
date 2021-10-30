@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 #include "aluno.h"
 #define MAX 100
 
-void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, float p2, float pt, float po)
+void addAluno(tAlunoEntrada *vetAlunos, int n, char *mod, int RA, float p1, float p2, float pt, float po)
 {
 	strcpy(vetAlunos[n].nome, mod);
 	vetAlunos[n].RA = RA;

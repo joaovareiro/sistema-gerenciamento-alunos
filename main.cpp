@@ -1,10 +1,19 @@
 #include <stdio.h>
 #include "aluno.h"
 #define MAX 100
+
 int main(){
+
 int op;
 tAlunoEntrada vetAlunos[MAX];
 int tamvetAlunos = 0;
+char nome[MAX];
+int RA;
+float p1;
+float p2;
+float pt;
+float po;
+float media;
 
 
 do{
@@ -19,6 +28,9 @@ do{
 
 		if(op == 1)
 		{
+		scanf(" %[^\n]", nome);
+		scanf("%d %f %f %f %f %f",RA,&p1,&p2,&pt,&po,&media);
+		addAluno(vetAlunos,tamvetAlunos,nome,RA,p1,p2,pt,po);
 		}
 		else if(op == 2)
 		{
@@ -35,6 +47,5 @@ do{
 
 	}while(op != 6);
 
-	return 0;
 }
 
