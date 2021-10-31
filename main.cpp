@@ -2,6 +2,7 @@
 #include "aluno.h"
 #define MAX 100
 
+
 int main(){
 
 int op;
@@ -14,6 +15,8 @@ float p2;
 float pt;
 float po;
 float media;
+
+void abreArquivo();
 
 
 do{

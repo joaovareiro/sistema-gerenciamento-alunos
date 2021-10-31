@@ -14,6 +14,16 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 	n++;
 
 }
+void buscaAluno(){
+    listaAlunos();
+
+}
+
+void listaAlunos(){
+FILE *pont_all;
+pont_all = fopen("ListaDeAlunos.txt", "a");
+fclose(pont_all);
+}
 
 void criaAprovados(){
 FILE *pont_aprov;
@@ -41,5 +51,27 @@ arqEntrada = fopen(nomeArq, "r");
 if( arqEntrada == NULL ){
   printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
 }else{
-	//adicionar alguma forma de os dados serem adicionados no vetor
+fscanf(arqEntrada, "%s %d %f %f %f %f",nome,&RA,&p1,&p2,&pt,&po);
+addAluno(vetAlunos,tamvetAlunos,nome[50],RA,p1,p2,pt,po);
+}
 }*/
+
+bool aprovador(int p1, int p2, int pt){
+
+float media = (0.35*p1)+(0.35*p2)+(0.3*pt);
+if(media>=6.0){
+    return true;
+}else{
+    return false;
+}
+}
+
+void optativa(int p1, int p2, int po){
+    int menor = p1;
+    if(p1>p2){
+        menor = p2;
+    }
+    if(po>menor){
+        menor = po;
+    }
+}
