@@ -1,8 +1,6 @@
-#include<iostream>
-#include<string>
+
 #include <stdio.h>
 #include <string.h>
-#include <wchar.h>
 #include "aluno.h"
 #define MAX 100
 
@@ -18,13 +16,17 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 
 }
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
-
+char * ret;
 for(int x = 0; x < n; x++){
-    if(vetAlunos[x].nome == nomedesejado){
-        printf("%s\n", vetAlunos[x].nome);
-    }
 
-}
+ret=strstr(vetAlunos[x].nome,nomedesejado);
+if(strstr(vetAlunos[x].nome,nomedesejado)){
+    for(int i=0;i<strlen(vetAlunos[x].nome);i++){
+            printf("%c",*(ret+i));
+    }
+    printf("\n");
+    }
+  }
 }
 
 
