@@ -1,5 +1,6 @@
+#define CARAC 50
 struct tAlunoEntrada {
-	char nome[50];
+	char nome[CARAC];
 	int RA;
 	float p1;
 	float p2;
@@ -12,7 +13,7 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 void criaAprovados();
 void criaReprovados();
 void abreArquivo();
-void buscaAluno();
+void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado);
 void listaAlunos();
 bool aprovador(int p1, int p2, int pt);
 void optativa(int p1, int p2, int po);

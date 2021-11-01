@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include<iostream>
+#include<string>
 #include "aluno.h"
 #define MAX 100
 
@@ -9,15 +11,13 @@ int op;
 tAlunoEntrada vetAlunos[MAX];
 int tamvetAlunos = 0;
 char nome[MAX];
+char nomedesejado[MAX];
 int RA;
 float p1;
 float p2;
 float pt;
 float po;
 float media;
-
-void abreArquivo();
-
 
 do{
 		printf("\n[1] Cadastrar um novo aluno\n");
@@ -37,6 +37,9 @@ do{
 		}
 		else if(op == 2)
 		{
+        //printf("Digite o nome do aluno que voce quer encontrar:");
+        scanf(" %[^\n]", nomedesejado);
+        buscaAluno(tamvetAlunos,vetAlunos,nomedesejado);
 		}
 		else if(op == 3)
 		{

@@ -1,5 +1,8 @@
+#include<iostream>
+#include<string>
 #include <stdio.h>
 #include <string.h>
+#include <wchar.h>
 #include "aluno.h"
 #define MAX 100
 
@@ -14,19 +17,16 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 	n++;
 
 }
-void buscaAluno(tAlunoEntrada *vetAlunos){
-    printf("Digite o nome do aluno que você quer encontrar:");
-    char nomedesejado[50];
-    const char *vetbusca[100];
-    int cont = 0;
-    scanf("%[^\n]", nomedesejado);
-    for (int i=0;i<100;i++){
-        if(nomedesejado == vetAlunos[i].nome){
-            vetbusca[cont]=vetAlunos[i].nome;
-            cont++;
-        }
+void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
+
+for(int x = 0; x < n; x++){
+    if(vetAlunos[x].nome == nomedesejado){
+        printf("%s\n", vetAlunos[x].nome);
     }
+
 }
+}
+
 
 void listaAlunos(){
 FILE *pont_all;
