@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include<iostream>
 #include<string>
 #include "aluno.h"
 #define MAX 100
@@ -50,7 +49,6 @@ do{
 		}
 		else if(op == 4)
 		{
-        criaAprovados(tamvetAlunos, vetAlunos);
 		}
 		else if(op == 5)
 		{

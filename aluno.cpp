@@ -5,6 +5,7 @@
 
 void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, float p2, float pt, float po)
 {
+    float r1,r2,r3;
 	strcpy(vetAlunos[n].nome, mod);
 	vetAlunos[n].RA = RA;
 	vetAlunos[n].p1 = p1;
@@ -12,25 +13,56 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 	vetAlunos[n].pt = pt;
 	vetAlunos[n].po = po;
 	n++;
-
+    optativa(p1,p2,pt,po,&r1,&r2,&r3);
+    vetAlunos[n].media= (0.35*r1)+(0.35*r2)+(0.3*r3);
+    if(aprovador(r1,r2,r3)==true){
+    vetAlunos[n].situacao=1;
+    }else{
+    vetAlunos[n].situacao=0;
+    }
 }
 
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
-char * ret;
 int cont = 0;
 for(int x = 0; x < n; x++){
-    ret=strstr(vetAlunos[x].nome,nomedesejado);
 if(strstr(vetAlunos[x].nome,nomedesejado)){
-    for(int i=0;i<strlen(vetAlunos[x].nome);i++){
-            printf("%c",*(ret+i));
+    printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[n].media);
+    if(vetAlunos[n].situacao==1){
+    printf("Aprovado\n");
+    }else{
+    printf("Reprovado\n");
     }
-    cont++;
-    printf("\n");
+    cont ++;
   }
 }
   if(cont == 0){
       printf("Aluno não encontrado na base de dados.\n");
   }
+}
+
+void optativa(float p1, float p2, float pt, float po, float* r1, float* r2, float* r3){
+    float temp = p1;
+    float maior = p2;
+    float trabalho = pt;
+    if(p1>p2){
+        maior = p1;
+        temp = p2;
+    }
+    if(po>temp){
+        temp = po;
+    }
+    *r1 = temp;
+    *r2 = maior;
+    *r3 = pt;
+}
+
+bool aprovador(float p1, float p2, float pt){
+float media = (0.35*p1)+(0.35*p2)+(0.3*pt);
+if(media>=6.0){
+    return true;
+}else{
+    return false;
+}
 }
 
 void listaAlunos(){
@@ -39,7 +71,7 @@ pont_all = fopen("ListaDeAlunos.txt", "a");
 fclose(pont_all);
 }
 
-void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
+/*void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
 
 FILE *pont_aprov;
 pont_aprov = fopen("Aprovados.txt", "a");
@@ -51,7 +83,7 @@ if(aprovador(vetAlunos[i].p1,vetAlunos[i].p2,vetAlunos[i].pt)==1){
 }
 fclose(pont_aprov);
 printf("O arquivo com os alunos aprovados foi criado com sucesso!");
-}
+}*/
 
 void criaReprovados(){
 FILE *pont_reprov;
@@ -81,70 +113,5 @@ while( fread(&aluno, sizeof(tAlunoEntrada), 1, arqEntrada)== 1 ){
 fgets(nome, 40, arq);
 }
 }
-}*/
-
-int aprovador(int p1, int p2, int pt){
-int media = (0.35*p1)+(0.35*p2)+(0.3*pt);
-if(media>=6.0){
-    return 1;
-}else{
-    return 0;
-}
-}
-
-void optativa(int p1, int p2, int po, int &r1, int &r2){
-    int temp = p1;
-    int maior = p2;
-    if(p1>p2){
-        maior = p1;
-        temp = p2;
-    }
-    if(po>temp){
-        temp = po;
-    }
-    r1 = temp;
-    r2 = maior;
-}
-
-/*void optativa(int vet[2],int p1, int p2, int po){
-    int temp = p1;
-    int maior = p2
-    if(p1>p2){
-        maior = p1;
-        temp = p2;
-    }
-    if(po>temp){
-        temp = po;
-    }
-    printf("%d %d", maior, temp);
-}*/
-
-/*void optativa(int vet[2],int p1, int p2, int po){
-    int vet[2];
-    if(p1>p2 && p2>po){
-        vet[0]=p1;
-        vet[1]=p2;
-    }
-    if(p2>p1 && p1>po){
-        vet[0]=p2;
-        vet[1]=p1;
-    }
-    if(po>p1 && p1>p2){
-        vet[0]=po;
-        vet[1]=p1;
-    }
-    if(p1>po && po>p2){
-        vet[0]=p1;
-        vet[1]=po;
-    }
-    if(po>p2 && p2>p1){
-        vet[0]=po;
-        vet[1]=p2;
-    }
-    if(p2>po && po>p1){
-        vet[0]=p2;
-        vet[1]=po;
-    }
-
 }*/
 
