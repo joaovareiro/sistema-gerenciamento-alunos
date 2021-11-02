@@ -49,11 +49,12 @@ do{
 		}
 		else if(op == 4)
 		{
+        criaAprovados(tamvetAlunos,vetAlunos);
 		}
 		else if(op == 5)
 		{
+        criaReprovados(tamvetAlunos,vetAlunos);
 		}
 
 	}while(op != 6);
-
 }

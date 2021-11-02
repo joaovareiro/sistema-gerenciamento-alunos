@@ -12,7 +12,7 @@ struct tAlunoEntrada {
 
 void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, float p2, float pt, float po);
 void criaAprovados(int &n, tAlunoEntrada *vetAlunos);
-void criaReprovados();
+void criaReprovados(int &n, tAlunoEntrada *vetAlunos);
 void abreArquivo(tAlunoEntrada *vetAlunos, int &n);
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado);
 void listaAlunos();

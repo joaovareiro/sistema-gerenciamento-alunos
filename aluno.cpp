@@ -26,8 +26,8 @@ void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
 int cont = 0;
 for(int x = 0; x < n; x++){
 if(strstr(vetAlunos[x].nome,nomedesejado)){
-    printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[n].media);
-    if(vetAlunos[n].situacao==1){
+    printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[x+1].media);
+    if(vetAlunos[x+1].situacao==1){
     printf("Aprovado\n");
     }else{
     printf("Reprovado\n");
@@ -71,25 +71,25 @@ pont_all = fopen("ListaDeAlunos.txt", "a");
 fclose(pont_all);
 }
 
-/*void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
-
+void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
 FILE *pont_aprov;
 pont_aprov = fopen("Aprovados.txt", "a");
-for(int i=0;i<n;i++){
-
-if(aprovador(vetAlunos[i].p1,vetAlunos[i].p2,vetAlunos[i].pt)==1){
-
-}
+for(int x = 0; x < n; x++)
+    if(vetAlunos[x+1].situacao==1){
+    fprintf(pont_aprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x+1].media);
 }
 fclose(pont_aprov);
-printf("O arquivo com os alunos aprovados foi criado com sucesso!");
-}*/
+}
 
-void criaReprovados(){
+
+void criaReprovados(int &n, tAlunoEntrada *vetAlunos){
 FILE *pont_reprov;
 pont_reprov = fopen("Reprovados.txt", "a");
+for(int x = 0; x < n; x++)
+    if(vetAlunos[x+1].situacao==0){
+    fprintf(pont_reprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x+1].media);
+}
 fclose(pont_reprov);
-printf("O arquivo com os alunos reprovados foi criado com sucesso!");
 }
 
 /*void fixString(char *entradastring){
