@@ -31,13 +31,17 @@ do{
 
 		if(op == 1)
 		{
+        printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
 		scanf(" %[^\n]", nome);
-		scanf("%d %f %f %f %f",&RA,&p1,&p2,&pt,&po);
+        printf("Digite o RA:\n");
+        scanf("%d",&RA);
+        printf("Digite as notas da P1, P2, do Trabalho e a nota da Prova optativa, caso o aluno não tenha feito a prova optativa digite 0 no lugar da nota da PO\n");
+		scanf("%f %f %f %f",&p1,&p2,&pt,&po);
 		addAluno(vetAlunos,tamvetAlunos,nome,RA,p1,p2,pt,po);
 		}
 		else if(op == 2)
 		{
-        //printf("Digite o nome do aluno que voce quer encontrar:");
+        printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
         scanf(" %[^\n]", nomedesejado);
         buscaAluno(tamvetAlunos,vetAlunos,nomedesejado);
 		}
@@ -46,6 +50,7 @@ do{
 		}
 		else if(op == 4)
 		{
+        criaAprovados(tamvetAlunos, vetAlunos);
 		}
 		else if(op == 5)
 		{
