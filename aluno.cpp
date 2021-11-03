@@ -12,7 +12,6 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 	vetAlunos[n].p2 = p2;
 	vetAlunos[n].pt = pt;
 	vetAlunos[n].po = po;
-	n++;
     optativa(p1,p2,pt,po,&r1,&r2,&r3);
     vetAlunos[n].media = (0.35*r1)+(0.35*r2)+(0.3*r3);
     if(aprovador(r1,r2,r3)==true){
@@ -20,13 +19,14 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
     }else{
     vetAlunos[n].situacao=0;
     }
+    n++;
 }
 
 void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
   int x,y,z;
   char nomeaux[51];
   for(x=0; x<=n;x++){
-    for (y=x+1; y < n ;y++){
+    for (y=x+1; y <n ;y++){
       z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
       if(z>0){
         strcpy(nomeaux, vetAlunos[x].nome);
@@ -41,8 +41,8 @@ void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
 int cont = 0;
 for(int x = 0; x < n; x++){
 if(strstr(vetAlunos[x].nome,nomedesejado)){
-    printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[x+1].media);
-    if(vetAlunos[x+1].situacao==1){
+    printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[x].media);
+    if(vetAlunos[x].situacao==1){
     printf("Aprovado\n");
     }else{
     printf("Reprovado\n");
@@ -90,10 +90,12 @@ void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
 ordenaAlunos(n, vetAlunos);
 FILE *pont_aprov;
 pont_aprov = fopen("Aprovados.txt", "a");
+
 for(int x = 0; x < n; x++)
-    if(vetAlunos[x+1].situacao==1){
-    fprintf(pont_aprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x+1].media);
+    if(vetAlunos[x].situacao==1){
+    fprintf(pont_aprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x].media);
 }
+
 fclose(pont_aprov);
 }
 
@@ -102,15 +104,10 @@ void criaReprovados(int &n, tAlunoEntrada *vetAlunos){
 FILE *pont_reprov;
 pont_reprov = fopen("Reprovados.txt", "a");
 for(int x = 0; x < n; x++)
-    if(vetAlunos[x+1].situacao==0){
-    fprintf(pont_reprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x+1].media);
+    if(vetAlunos[x].situacao==0){
+    fprintf(pont_reprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x].media);
 }
 fclose(pont_reprov);
-}
-
-void fixString(char *entradastring){
-    int tamString = strlen(entradastring);
-    entradastring[tamString - 2] = '\0';
 }
 
 void abreArquivo(tAlunoEntrada *vetAlunos, int &n){
