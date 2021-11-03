@@ -18,5 +18,4 @@ void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado);
 void listaAlunos();
 bool aprovador(float p1, float p2, float pt);
 void optativa(float p1, float p2, float pt, float po, float* r1, float* r2, float* r3);
-void imprime(int &n, tAlunoEntrada *vetAlunos);
 void ordenaAlunos(int &n, tAlunoEntrada *vetAlunos);
