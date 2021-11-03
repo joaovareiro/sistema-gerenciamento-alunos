@@ -25,13 +25,21 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
   int x,y,z;
   char nomeaux[51];
+  float mediaaux;
+  int RAaux;
   for(x=0; x<=n;x++){
     for (y=x+1; y <n ;y++){
       z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
       if(z>0){
         strcpy(nomeaux, vetAlunos[x].nome);
+        RAaux = vetAlunos[x].RA;
+        mediaaux = vetAlunos[x].media;
         strcpy(vetAlunos[x].nome,vetAlunos[y].nome);
+        vetAlunos[x].media = vetAlunos[y].media;
+        vetAlunos[x].RA = vetAlunos[y].RA;
         strcpy(vetAlunos[y].nome,nomeaux);
+        vetAlunos[y].RA=RAaux;
+        vetAlunos[y].media=mediaaux;
       }
     }
   }
