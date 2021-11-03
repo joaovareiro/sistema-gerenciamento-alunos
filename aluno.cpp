@@ -28,7 +28,19 @@ void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
   float mediaaux;
   int RAaux;
   for(x=0; x<=n;x++){
-    for (y=x+1; y <n ;y++){
+    for (y=x+1; y<n ;y++){
+      if((strcmp(vetAlunos[x].nome,vetAlunos[y].nome)==0)&& (vetAlunos[x].RA>vetAlunos[y].RA)){
+
+                RAaux = vetAlunos[x].RA;
+                vetAlunos[x].RA = vetAlunos[y].RA;
+                vetAlunos[y].RA=RAaux;
+
+                mediaaux = vetAlunos[x].media;
+                vetAlunos[x].media = vetAlunos[y].media;
+                vetAlunos[y].media=mediaaux;
+
+        }
+
       z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
       if(z>0){
         strcpy(nomeaux, vetAlunos[x].nome);
@@ -40,9 +52,9 @@ void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
         strcpy(vetAlunos[y].nome,nomeaux);
         vetAlunos[y].RA=RAaux;
         vetAlunos[y].media=mediaaux;
-      }
     }
   }
+}
 }
 
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
