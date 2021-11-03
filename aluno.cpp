@@ -108,25 +108,31 @@ fclose(pont_all);
 
 void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
 ordenaAlunos(n, vetAlunos);
+int cont = 0;
 FILE *pont_aprov;
 pont_aprov = fopen("Aprovados.txt", "a");
 
 for(int x = 0; x < n; x++)
     if(vetAlunos[x].situacao==1){
     fprintf(pont_aprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x].media);
+    cont++;
 }
-
+fprintf(pont_aprov,"Total: %d",cont);
 fclose(pont_aprov);
 }
 
 
 void criaReprovados(int &n, tAlunoEntrada *vetAlunos){
+ordenaAlunos(n, vetAlunos);
 FILE *pont_reprov;
+int cont = 0;
 pont_reprov = fopen("Reprovados.txt", "a");
 for(int x = 0; x < n; x++)
     if(vetAlunos[x].situacao==0){
     fprintf(pont_reprov,"%s %d %.1f\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x].media);
+    cont++;
 }
+fprintf(pont_reprov,"Total: %d",cont);
 fclose(pont_reprov);
 }
 
