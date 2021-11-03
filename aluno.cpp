@@ -14,12 +14,27 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 	vetAlunos[n].po = po;
 	n++;
     optativa(p1,p2,pt,po,&r1,&r2,&r3);
-    vetAlunos[n].media= (0.35*r1)+(0.35*r2)+(0.3*r3);
+    vetAlunos[n].media = (0.35*r1)+(0.35*r2)+(0.3*r3);
     if(aprovador(r1,r2,r3)==true){
     vetAlunos[n].situacao=1;
     }else{
     vetAlunos[n].situacao=0;
     }
+}
+
+void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
+  int x,y,z;
+  char nomeaux[51];
+  for(x=0; x<=n;x++){
+    for (y=x+1; y < n ;y++){
+      z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
+      if(z>0){
+        strcpy(nomeaux, vetAlunos[x].nome);
+        strcpy(vetAlunos[x].nome,vetAlunos[y].nome);
+        strcpy(vetAlunos[y].nome,nomeaux);
+      }
+    }
+  }
 }
 
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
@@ -72,6 +87,7 @@ fclose(pont_all);
 }
 
 void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
+ordenaAlunos(n, vetAlunos);
 FILE *pont_aprov;
 pont_aprov = fopen("Aprovados.txt", "a");
 for(int x = 0; x < n; x++)
@@ -92,16 +108,15 @@ for(int x = 0; x < n; x++)
 fclose(pont_reprov);
 }
 
-/*void fixString(char *entradastring){
+void fixString(char *entradastring){
     int tamString = strlen(entradastring);
     entradastring[tamString - 2] = '\0';
 }
 
 void abreArquivo(tAlunoEntrada *vetAlunos, int &n){
 
-printf("Digite o nome do arquivo que contem os alunos");
+printf("Digite o nome do arquivo que contem os alunos\n");
 FILE* arqEntrada;
-tAlunoEntrada aluno;
 char nomeArq[MAX];
 scanf(" %s", nomeArq);
 arqEntrada = fopen(nomeArq, "r");
@@ -109,9 +124,9 @@ arqEntrada = fopen(nomeArq, "r");
 if( arqEntrada == NULL ){
   printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
 }else{
-while( fread(&aluno, sizeof(tAlunoEntrada), 1, arqEntrada)== 1 ){
-fgets(nome, 40, arq);
+while( feof(arqEntrada) == 0 ){
+fscanf(arqEntrada,"%s %d %f %f %f %f",vetAlunos[n].nome,&vetAlunos[n].RA,&vetAlunos[n].p1,&vetAlunos[n].p2,&vetAlunos[n].pt,&vetAlunos[n].po);
+fclose(arqEntrada);
+        }
+    }
 }
-}
-}*/
-

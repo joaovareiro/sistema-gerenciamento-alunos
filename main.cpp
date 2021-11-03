@@ -46,6 +46,7 @@ do{
 		}
 		else if(op == 3)
 		{
+        abreArquivo(vetAlunos,tamvetAlunos);
 		}
 		else if(op == 4)
 		{
