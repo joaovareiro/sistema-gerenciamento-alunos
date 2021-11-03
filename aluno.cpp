@@ -148,7 +148,7 @@ if( arqEntrada == NULL ){
   printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
 }else{
 while( feof(arqEntrada) == 0 ){
-fscanf(arqEntrada,"%s %d %f %f %f %f",vetAlunos[n].nome,&vetAlunos[n].RA,&vetAlunos[n].p1,&vetAlunos[n].p2,&vetAlunos[n].pt,&vetAlunos[n].po);
+fscanf(arqEntrada," %[^0123456789] %d %f %f %f %f\n",vetAlunos[n].nome,&vetAlunos[n].RA,&vetAlunos[n].p1,&vetAlunos[n].p2,&vetAlunos[n].pt,&vetAlunos[n].po);
 fclose(arqEntrada);
         }
     }
