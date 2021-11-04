@@ -24,40 +24,27 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
 
 void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
   int x,y,z;
-  char nomeaux[51];
-  float mediaaux;
-  int RAaux;
+
+  tAlunoEntrada aux;
   for(x=0; x<=n;x++){
     for (y=x+1; y<n ;y++){
-      if((strcmp(vetAlunos[x].nome,vetAlunos[y].nome)==0)&& (vetAlunos[x].RA>vetAlunos[y].RA)){
-
-                RAaux = vetAlunos[x].RA;
-                vetAlunos[x].RA = vetAlunos[y].RA;
-                vetAlunos[y].RA=RAaux;
-
-                mediaaux = vetAlunos[x].media;
-                vetAlunos[x].media = vetAlunos[y].media;
-                vetAlunos[y].media=mediaaux;
-
+      if((strcmp(vetAlunos[x].nome,vetAlunos[y].nome)==0) && (vetAlunos[x].RA>vetAlunos[y].RA)){
+                aux = vetAlunos[x];
+                vetAlunos[x] = vetAlunos[y];
+                vetAlunos[y] = aux;
         }
-
       z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
       if(z>0){
-        strcpy(nomeaux, vetAlunos[x].nome);
-        RAaux = vetAlunos[x].RA;
-        mediaaux = vetAlunos[x].media;
-        strcpy(vetAlunos[x].nome,vetAlunos[y].nome);
-        vetAlunos[x].media = vetAlunos[y].media;
-        vetAlunos[x].RA = vetAlunos[y].RA;
-        strcpy(vetAlunos[y].nome,nomeaux);
-        vetAlunos[y].RA=RAaux;
-        vetAlunos[y].media=mediaaux;
+                aux = vetAlunos[x];
+                vetAlunos[x] = vetAlunos[y];
+                vetAlunos[y] = aux;
+            }
+        }
     }
-  }
-}
 }
 
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
+ordenaAlunos(n,vetAlunos);
 int cont = 0;
 for(int x = 0; x < n; x++){
 if(strstr(vetAlunos[x].nome,nomedesejado)){
@@ -100,12 +87,6 @@ if(media>=6.0){
 }
 }
 
-void listaAlunos(){
-FILE *pont_all;
-pont_all = fopen("ListaDeAlunos.txt", "a");
-fclose(pont_all);
-}
-
 void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
 ordenaAlunos(n, vetAlunos);
 int cont = 0;
@@ -136,20 +117,27 @@ fprintf(pont_reprov,"Total: %d",cont);
 fclose(pont_reprov);
 }
 
-void abreArquivo(tAlunoEntrada *vetAlunos, int &n){
 
+void abreArquivo(tAlunoEntrada *vetAlunos, int &n){
+printf("%d\n",n);
 printf("Digite o nome do arquivo que contem os alunos\n");
 FILE* arqEntrada;
 char nomeArq[MAX];
 scanf(" %s", nomeArq);
 arqEntrada = fopen(nomeArq, "r");
+tAlunoEntrada teste;
 
 if( arqEntrada == NULL ){
   printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
 }else{
-while( feof(arqEntrada) == 0 ){
-fscanf(arqEntrada," %[^0123456789] %d %f %f %f %f\n",vetAlunos[n].nome,&vetAlunos[n].RA,&vetAlunos[n].p1,&vetAlunos[n].p2,&vetAlunos[n].pt,&vetAlunos[n].po);
+
+for (int k = n; feof(arqEntrada)==0;k++){
+
+    fscanf(arqEntrada, "%50[^0123456789] %d %f %f %f %f\n",vetAlunos[k].nome,&vetAlunos[k].RA,&vetAlunos[k].p1,&vetAlunos[k].p2,&vetAlunos[k].pt,&vetAlunos[k].po);
+
+    addAluno(vetAlunos,n,vetAlunos[k].nome,vetAlunos[k].RA,vetAlunos[k].p1,vetAlunos[k].p2,vetAlunos[k].pt,vetAlunos[k].po);
+}
+ordenaAlunos(n, vetAlunos);
 fclose(arqEntrada);
-        }
-    }
+}
 }
