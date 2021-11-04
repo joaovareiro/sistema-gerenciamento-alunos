@@ -7,7 +7,7 @@ struct tAlunoEntrada {
 	float pt;
 	float po;
 	float media;
-    int situacao;
+	int situacao;
 };
 
 void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA,float p1, float p2, float pt, float po);
