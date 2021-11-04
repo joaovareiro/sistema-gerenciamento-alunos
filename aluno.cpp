@@ -117,7 +117,6 @@ fprintf(pont_reprov,"Total: %d",cont);
 fclose(pont_reprov);
 }
 
-
 void abreArquivo(tAlunoEntrada *vetAlunos, int &n){
 printf("%d\n",n);
 printf("Digite o nome do arquivo que contem os alunos\n");
@@ -132,9 +131,10 @@ if( arqEntrada == NULL ){
 }else{
 
 for (int k = n; feof(arqEntrada)==0;k++){
-
-    fscanf(arqEntrada, "%50[^0123456789] %d %f %f %f %f\n",vetAlunos[k].nome,&vetAlunos[k].RA,&vetAlunos[k].p1,&vetAlunos[k].p2,&vetAlunos[k].pt,&vetAlunos[k].po);
-
+    char tofix[50];
+    fscanf(arqEntrada, "%50[^0123456789] %d %f %f %f %f\n",tofix,&vetAlunos[k].RA,&vetAlunos[k].p1,&vetAlunos[k].p2,&vetAlunos[k].pt,&vetAlunos[k].po);
+    tofix[strlen(tofix)-1] = '\0';
+    strcpy(vetAlunos[k].nome,tofix);
     addAluno(vetAlunos,n,vetAlunos[k].nome,vetAlunos[k].RA,vetAlunos[k].p1,vetAlunos[k].p2,vetAlunos[k].pt,vetAlunos[k].po);
 }
 ordenaAlunos(n, vetAlunos);
