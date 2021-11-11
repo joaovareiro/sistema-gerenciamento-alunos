@@ -50,4 +50,7 @@ do{
         criaReprovados(tamvetAlunos,vetAlunos);
 		}
 	}while(op != 6);
+    if(op == 6){
+        criaAtual(tamvetAlunos,vetAlunos);
+    }
 }
