@@ -5,7 +5,7 @@
 
 int main(){
 int op;
-tAlunoEntrada vetAlunos[MAX];
+tAlunoEntrada vetAlunos[MAX],vetAlunosCopia[MAX];
 int tamvetAlunos = 0;
 char nome[MAX];
 char nomedesejado[MAX];
@@ -27,30 +27,33 @@ do{
 		scanf("%d", &op);
 
 		if(op == 1){
-    printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
-		scanf(" %[^\n]", nome);
-    printf("Digite o RA:\n");
-    scanf("%d",&RA);
-    printf("Digite as notas da P1, P2, do Trabalho e a nota da Prova optativa, caso o aluno não tenha feito a prova optativa digite 0 no lugar da nota da PO\n");
+        printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
+            scanf(" %[^\n]", nome);
+        printf("Digite o RA:\n");
+        scanf("%d",&RA);
+        printf("Digite as notas da P1, P2, do Trabalho e a nota da Prova optativa, caso o aluno não tenha feito a prova optativa digite 0 no lugar da nota da PO\n");
 		scanf("%f %f %f %f",&p1,&p2,&pt,&po);
 		addAluno(vetAlunos,tamvetAlunos,nome,RA,p1,p2,pt,po);
 		}
 		else if(op == 2){
-      printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
-      scanf(" %[^\n]", nomedesejado);
-      buscaAluno(tamvetAlunos,vetAlunos,nomedesejado);
+        printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
+        scanf(" %[^\n]", nomedesejado);
+        buscaAluno(tamvetAlunos,vetAlunos,nomedesejado);
 		}
 		else if(op == 3){
         abreArquivo(vetAlunos,tamvetAlunos);
 		}
 		else if(op == 4){
-        criaAprovados(tamvetAlunos,vetAlunos);
+        copiar(tamvetAlunos,vetAlunos,vetAlunosCopia);
+        criaAprovados(tamvetAlunos,vetAlunosCopia);
 		}
 		else if(op == 5){
-        criaReprovados(tamvetAlunos,vetAlunos);
+        copiar(tamvetAlunos,vetAlunos,vetAlunosCopia);
+        criaReprovados(tamvetAlunos,vetAlunosCopia);
 		}
 	}while(op != 6);
-    if(op == 6){
+        if(op == 6){
+        copiar(tamvetAlunos,vetAlunos,vetAlunosCopia);
         criaAtual(tamvetAlunos,vetAlunos);
     }
 }

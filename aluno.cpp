@@ -22,6 +22,11 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, float p1, flo
     n++;
 }
 
+void copiar(int &n, tAlunoEntrada *vetAlunosOriginal,  tAlunoEntrada *vetAlunosCopiado){
+    for(int cont=0 ; cont < n ; cont++)
+        vetAlunosCopiado[cont] = vetAlunosOriginal[cont];
+}
+
 void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
   int x,y,z;
 
@@ -44,9 +49,9 @@ void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
 }
 
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
-ordenaAlunos(n,vetAlunos);
 int cont = 0;
 for(int x = 0; x < n; x++){
+
 if(strstr(vetAlunos[x].nome,nomedesejado)){
     printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[x].media);
     if(vetAlunos[x].situacao==1){
@@ -59,8 +64,18 @@ if(strstr(vetAlunos[x].nome,nomedesejado)){
 }
   if(cont == 0){
       printf("Aluno não encontrado na base de dados.\n");
+  }else{
+    printf("Numero de alunos encontrados = %d",cont);
   }
 }
+
+/*void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
+    int cont = 0;
+    bool aux = true;
+    int len = strlen(nomedesejado);
+
+    for(int )
+}*/
 
 void optativa(float p1, float p2, float pt, float po, float* r1, float* r2, float* r3){
     float temp = p1;
@@ -118,7 +133,6 @@ fclose(pont_reprov);
 }
 
 void criaAtual(int &n, tAlunoEntrada *vetAlunos){
-ordenaAlunos(n, vetAlunos);
 FILE *pont_reprov;
 pont_reprov = fopen("Atual.txt", "w");
 for(int x = 0; x < n; x++)
@@ -146,7 +160,6 @@ for (int k = n; feof(arqEntrada)==0;k++){
     strcpy(vetAlunos[k].nome,tofix);
     addAluno(vetAlunos,n,vetAlunos[k].nome,vetAlunos[k].RA,vetAlunos[k].p1,vetAlunos[k].p2,vetAlunos[k].pt,vetAlunos[k].po);
 }
-ordenaAlunos(n, vetAlunos);
 fclose(arqEntrada);
 }
 

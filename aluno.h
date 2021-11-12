@@ -19,3 +19,4 @@ bool aprovador(float p1, float p2, float pt);
 void optativa(float p1, float p2, float pt, float po, float* r1, float* r2, float* r3);
 void ordenaAlunos(int &n, tAlunoEntrada *vetAlunos);
 void criaAtual(int &n, tAlunoEntrada *vetAlunos);
+void copiar(int &n, tAlunoEntrada *vetAlunosOriginal,  tAlunoEntrada *vetAlunosCopiado);
