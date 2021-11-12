@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
+#include <stdlib.h>
 #include "aluno.h"
 #define MAX 100
 
@@ -48,11 +50,20 @@ void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
     }
 }
 
+char* toLower(char* s) {
+  for(char *p=s; *p; p++) *p=tolower(*p);
+  return s;
+}
+
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
 int cont = 0;
-for(int x = 0; x < n; x++){
+tAlunoEntrada vetAlunosaux[MAX];
+copiar(n,vetAlunos, vetAlunosaux);
 
-if(strstr(vetAlunos[x].nome,nomedesejado)){
+for(int x = 0; x < n; x++){
+char* a = toLower(vetAlunosaux[x].nome);
+char* ab= toLower(nomedesejado);
+if(strstr(a,nomedesejado)){
     printf("%s %.1f ",vetAlunos[x].nome,vetAlunos[x].media);
     if(vetAlunos[x].situacao==1){
     printf("Aprovado\n");
@@ -69,13 +80,6 @@ if(strstr(vetAlunos[x].nome,nomedesejado)){
   }
 }
 
-/*void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
-    int cont = 0;
-    bool aux = true;
-    int len = strlen(nomedesejado);
-
-    for(int )
-}*/
 
 void optativa(float p1, float p2, float pt, float po, float* r1, float* r2, float* r3){
     float temp = p1;
