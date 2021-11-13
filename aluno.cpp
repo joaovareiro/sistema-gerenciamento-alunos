@@ -1,9 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
-#include <stdlib.h>
 #include "aluno.h"
-#define MAX 100
 
 void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, double p1, double p2, double pt, double po)
 {
@@ -24,24 +22,18 @@ void addAluno(tAlunoEntrada *vetAlunos, int &n, char *mod, int RA, double p1, do
     n++;
 }
 
-void copiar(int &n, tAlunoEntrada *vetAlunosOriginal,  tAlunoEntrada *vetAlunosCopiado){
-    for(int cont=0 ; cont < n ; cont++)
-        vetAlunosCopiado[cont] = vetAlunosOriginal[cont];
-}
-
 void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
-  int x,y,z;
-
-  tAlunoEntrada aux;
-  for(x=0; x<=n;x++){
-    for (y=x+1; y<n ;y++){
-      if((strcmp(vetAlunos[x].nome,vetAlunos[y].nome)==0) && (vetAlunos[x].RA>vetAlunos[y].RA)){
+    int x,y,z;
+    tAlunoEntrada aux;
+    for(x=0; x<=n;x++){
+        for (y=x+1; y<n ;y++){
+            if((strcmp(vetAlunos[x].nome,vetAlunos[y].nome)==0) && (vetAlunos[x].RA>vetAlunos[y].RA)){
                 aux = vetAlunos[x];
                 vetAlunos[x] = vetAlunos[y];
                 vetAlunos[y] = aux;
         }
-      z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
-      if(z>0){
+        z = strcmp(vetAlunos[x].nome,vetAlunos[y].nome);
+        if(z>0){
                 aux = vetAlunos[x];
                 vetAlunos[x] = vetAlunos[y];
                 vetAlunos[y] = aux;
@@ -50,10 +42,17 @@ void ordenaAlunos(int &n,tAlunoEntrada *vetAlunos){
     }
 }
 
+void copiar(int &n, tAlunoEntrada *vetAlunosOriginal,  tAlunoEntrada *vetAlunosCopiado){
+    for(int cont=0 ; cont < n ; cont++)
+        vetAlunosCopiado[cont] = vetAlunosOriginal[cont];
+}
+
 char* toLower(char* s) {
-  for(char *p=s; *p; p++) *p=tolower(*p);
+  for(char *p=s; *p; p++) 
+  *p=tolower(*p);
   return s;
 }
+
 
 void buscaAluno(int &n, tAlunoEntrada *vetAlunos, char *nomedesejado){
 int cont = 0;
@@ -62,8 +61,8 @@ copiar(n,vetAlunos, vetAlunosaux);
 
 for(int x = 0; x < n; x++){
 char* a = toLower(vetAlunosaux[x].nome);
-char* ab= toLower(nomedesejado);
-if(strstr(a,nomedesejado)){
+char* b= toLower(nomedesejado);
+if(strstr(a,b)){
     printf("%s %.1lf ",vetAlunos[x].nome,vetAlunos[x].media);
     if(vetAlunos[x].situacao==1){
     printf("Aprovado\n");
@@ -133,6 +132,7 @@ fclose(pont_reprov);
 }
 
 void criaAtual(int &n, tAlunoEntrada *vetAlunos){
+ordenaAlunos(n, vetAlunos);
 FILE *pont_reprov;
 pont_reprov = fopen("atual.txt", "w");
 for(int x = 0; x < n; x++)
@@ -150,20 +150,17 @@ arqEntrada = fopen(nomeArq, "r");
 tAlunoEntrada teste;
 
 if( arqEntrada == NULL ){
-  printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
+  printf("O Arquivo %s nao pode ser aberto.\n", nomeArq);
 }else{
-int cont = 0;
+
 for (int k = n; feof(arqEntrada)==0;k++){
     char tofix[50];
     fscanf(arqEntrada, "%50[^0123456789] %d %lf %lf %lf %lf\n",tofix,&vetAlunos[k].RA,&vetAlunos[k].p1,&vetAlunos[k].p2,&vetAlunos[k].pt,&vetAlunos[k].po);
     tofix[strlen(tofix)-1] = '\0';
     strcpy(vetAlunos[k].nome,tofix);
     addAluno(vetAlunos,n,vetAlunos[k].nome,vetAlunos[k].RA,vetAlunos[k].p1,vetAlunos[k].p2,vetAlunos[k].pt,vetAlunos[k].po);
-    cont++;
 }
+ordenaAlunos(n, vetAlunos);
 fclose(arqEntrada);
-printf("Foram cadastrados %d alunos",cont);
 }
-
-
 }
