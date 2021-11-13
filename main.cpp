@@ -10,11 +10,11 @@ int tamvetAlunos = 0;
 char nome[MAX];
 char nomedesejado[MAX];
 int RA;
-float p1;
-float p2;
-float pt;
-float po;
-float media;
+double p1;
+double p2;
+double pt;
+double po;
+double media;
 
 do{
 		printf("\n[1] Cadastrar um novo aluno\n");
@@ -32,7 +32,7 @@ do{
         printf("Digite o RA:\n");
         scanf("%d",&RA);
         printf("Digite as notas da P1, P2, do Trabalho e a nota da Prova optativa, caso o aluno não tenha feito a prova optativa digite 0 no lugar da nota da PO\n");
-		scanf("%f %f %f %f",&p1,&p2,&pt,&po);
+		scanf("%lf %lf %lf %lf",&p1,&p2,&pt,&po);
 		addAluno(vetAlunos,tamvetAlunos,nome,RA,p1,p2,pt,po);
 		}
 		else if(op == 2){
