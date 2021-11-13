@@ -73,11 +73,7 @@ if(strstr(a,nomedesejado)){
     cont ++;
   }
 }
-  if(cont == 0){
-      printf("Aluno não encontrado na base de dados.\n");
-  }else{
-    printf("Numero de alunos encontrados = %d",cont);
-  }
+printf("Numero de alunos encontrados = %d",cont);
 }
 
 
@@ -110,7 +106,7 @@ void criaAprovados(int &n, tAlunoEntrada *vetAlunos){
 ordenaAlunos(n, vetAlunos);
 int cont = 0;
 FILE *pont_aprov;
-pont_aprov = fopen("Aprovados.txt", "w");
+pont_aprov = fopen("aprovados.txt", "w");
 
 for(int x = 0; x < n; x++)
     if(vetAlunos[x].situacao==1){
@@ -126,7 +122,7 @@ void criaReprovados(int &n, tAlunoEntrada *vetAlunos){
 ordenaAlunos(n, vetAlunos);
 FILE *pont_reprov;
 int cont = 0;
-pont_reprov = fopen("Reprovados.txt", "w");
+pont_reprov = fopen("reprovados.txt", "w");
 for(int x = 0; x < n; x++)
     if(vetAlunos[x].situacao==0){
     fprintf(pont_reprov,"%s %d %.1lf\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x].media);
@@ -138,7 +134,7 @@ fclose(pont_reprov);
 
 void criaAtual(int &n, tAlunoEntrada *vetAlunos){
 FILE *pont_reprov;
-pont_reprov = fopen("Atual.txt", "w");
+pont_reprov = fopen("atual.txt", "w");
 for(int x = 0; x < n; x++)
     fprintf(pont_reprov,"%s %d %.1lf %.1lf %.1lf %.1lf\n",vetAlunos[x].nome,vetAlunos[x].RA,vetAlunos[x].p1,vetAlunos[x].p2,vetAlunos[x].pt,vetAlunos[x].po);
 fclose(pont_reprov);
@@ -156,15 +152,17 @@ tAlunoEntrada teste;
 if( arqEntrada == NULL ){
   printf("\n\n Arquivo %s nao pode ser aberto.\n\n", nomeArq);
 }else{
-
+int cont = 0;
 for (int k = n; feof(arqEntrada)==0;k++){
     char tofix[50];
     fscanf(arqEntrada, "%50[^0123456789] %d %lf %lf %lf %lf\n",tofix,&vetAlunos[k].RA,&vetAlunos[k].p1,&vetAlunos[k].p2,&vetAlunos[k].pt,&vetAlunos[k].po);
     tofix[strlen(tofix)-1] = '\0';
     strcpy(vetAlunos[k].nome,tofix);
     addAluno(vetAlunos,n,vetAlunos[k].nome,vetAlunos[k].RA,vetAlunos[k].p1,vetAlunos[k].p2,vetAlunos[k].pt,vetAlunos[k].po);
+    cont++;
 }
 fclose(arqEntrada);
+printf("Foram cadastrados %d alunos",cont);
 }
 
 

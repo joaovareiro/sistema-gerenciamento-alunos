@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include<string>
 #include "aluno.h"
-#define MAX 100
 
 int main(){
 int op;
@@ -28,7 +27,7 @@ do{
 
 		if(op == 1){
         printf("Digite o nome do aluno(sem acentos e cedilhas):\n");
-            scanf(" %[^\n]", nome);
+        scanf(" %[^\n]", nome);
         printf("Digite o RA:\n");
         scanf("%d",&RA);
         printf("Digite as notas da P1, P2, do Trabalho e a nota da Prova optativa, caso o aluno não tenha feito a prova optativa digite 0 no lugar da nota da PO\n");
